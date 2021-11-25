@@ -68,10 +68,6 @@ function App() {
 	const [prevSelectedFruit, setPrevSelectedFruit] = useState(fruits[0]);
 	const [direction, setDirection] = useState(Directions.Right);
 
-	useEffect(() => {
-		console.log("direction:", direction);
-	}, [direction]);
-
 	const selectFruit = (fruit) => {
 		setPrevSelectedFruit(selectedFruit);
 		setSelectedFruit(fruit);
