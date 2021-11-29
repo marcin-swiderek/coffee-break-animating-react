@@ -49,7 +49,7 @@ const fruits = [
 function App() {
 	const [selectedFruit, setSelectedFruit] = useState(fruits[0]);
 	const [prevSelectedFruit, setPrevSelectedFruit] = useState(fruits[0]);
-	const [direcion, setDirection] = useState("right");
+	const [direction, setDirection] = useState("right");
 
 	const selectFruit = (fruit) => {
 		setPrevSelectedFruit(selectedFruit);
