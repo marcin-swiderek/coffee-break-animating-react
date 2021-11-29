@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import dragonImg from "./assets/dragon_shadow.png";
 import appleImg from "./assets/apple3_shadow.png";
@@ -45,6 +45,12 @@ const fruits = [
 		desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste accusantium, quis ex reprehenderit libero repudiandae soluta nihil ab amet facere unde a libero.",
 	},
 ];
+
+// const variants = {
+// 	initial: (direction) => ({ x: direction === "right" ? -300 : 300 }),
+// 	animate: { x: 0 },
+// 	exit: (direction) => ({ x: direction === "left" ? -300 : 300 }),
+// };
 
 function App() {
 	const [selectedFruit, setSelectedFruit] = useState(fruits[0]);
