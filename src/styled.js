@@ -106,7 +106,7 @@ export const FruitDescription = styled.div`
 	color: #333;
 `;
 
-export const FruitBackground = styled.div`
+export const FruitBackground = styled(motion.div)`
 	position: absolute;
 	bottom: -75px;
 	right: -100px;
