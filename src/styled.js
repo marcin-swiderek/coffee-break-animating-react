@@ -35,7 +35,7 @@ export const TabsContainer = styled.div`
 	grid-template-columns: repeat(3, 1fr);
 `;
 
-export const TabWrapper = styled(motion.div)`
+export const TabWrapper = styled.div`
 	display: grid;
 	grid-template-columns: 1fr;
 	grid-template-rows: 1fr min-content;
@@ -55,9 +55,10 @@ export const Underline = styled(motion.div)`
 	width: 95%;
 	height: 4px;
 	border-radius: 16px;
+	background: black;
 `;
 
-export const ContentContainer = styled(motion.div)`
+export const ContentContainer = styled.div`
 	position: relative;
 	width: 100%;
 	height: 100%;
@@ -105,7 +106,7 @@ export const FruitDescription = styled.div`
 	color: #333;
 `;
 
-export const FruitBackground = styled(motion.div)`
+export const FruitBackground = styled.div`
 	position: absolute;
 	bottom: -75px;
 	right: -100px;
@@ -114,4 +115,5 @@ export const FruitBackground = styled(motion.div)`
 	height: 350px;
 	opacity: 0.15;
 	z-index: 100;
+	background: black;
 `;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { AnimatePresence, LayoutGroup } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import dragonImg from "./assets/dragon_shadow.png";
 import appleImg from "./assets/apple3_shadow.png";
 import bananaImg from "./assets/bananas_shadow.png";
@@ -46,35 +46,13 @@ const fruits = [
 	},
 ];
 
-const Directions = {
-	Left: "left",
-	Right: "right",
-};
-
-const variants = {
-	initial: (direction) => ({
-		x: direction === Directions.Right ? 300 : -300,
-	}),
-	animate: {
-		x: 0,
-	},
-	exit: (direction) => ({
-		x: direction === Directions.Left ? 300 : -300,
-	}),
-};
-
 function App() {
 	const [selectedFruit, setSelectedFruit] = useState(fruits[0]);
 	const [prevSelectedFruit, setPrevSelectedFruit] = useState(fruits[0]);
-	const [direction, setDirection] = useState(Directions.Right);
 
 	const selectFruit = (fruit) => {
 		setPrevSelectedFruit(selectedFruit);
 		setSelectedFruit(fruit);
-
-		setDirection(
-			fruit.id > selectedFruit.id ? Directions.Right : Directions.Left
-		);
 	};
 
 	const renderTabs = () =>
@@ -86,63 +64,34 @@ function App() {
 					<Tab
 						bg={fruit.color}
 						onClick={() => selectFruit(fruits[index])}
-						layout
-						animate={{
-							opacity: isSelected ? 1 : 0.4,
-						}}
-						transition={{ duration: 0.3 }}
 					/>
-					{isSelected && (
-						<Underline
-							layoutId="underline"
-							initial={{ background: prevSelectedFruit.color }}
-							animate={{ background: selectedFruit.color }}
-							transition={{ duration: 0.3 }}
-						/>
-					)}
+					{isSelected && <Underline />}
 				</TabWrapper>
 			);
 		});
 
 	return (
 		<AppContainer>
-			<AppWrapper
-				animate={{ borderColor: selectedFruit.color }}
-				transition={{ duration: 0.3 }}
-			>
-				<TabsContainer>
-					<LayoutGroup>{renderTabs()}</LayoutGroup>
-				</TabsContainer>
+			<AppWrapper>
+				<TabsContainer>{renderTabs()}</TabsContainer>
 				<ContentContainer>
-					<AnimatePresence custom={direction} initial={false}>
-						<Image
-							key={selectedFruit.img}
-							src={selectedFruit.img}
-							alt="Dragon fruit"
-							custom={direction}
-							variants={variants}
-							initial="initial"
-							animate="animate"
-							exit="exit"
-							transition={{ duration: 1 }}
-						/>
-
-						<FruitInfoContainer>
-							<FruitName>{selectedFruit.name}</FruitName>
-							<FruitPronouncination>
-								{selectedFruit.pronouncination}
-							</FruitPronouncination>
-							<FruitDescription>
-								{selectedFruit.desc}
-							</FruitDescription>
-						</FruitInfoContainer>
-					</AnimatePresence>
-
-					<FruitBackground
-						initial={{ background: prevSelectedFruit.color }}
-						animate={{ background: selectedFruit.color }}
-						transition={{ duration: 0.3 }}
+					<Image
+						key={selectedFruit.img}
+						src={selectedFruit.img}
+						alt="Dragon fruit"
 					/>
+
+					<FruitInfoContainer>
+						<FruitName>{selectedFruit.name}</FruitName>
+						<FruitPronouncination>
+							{selectedFruit.pronouncination}
+						</FruitPronouncination>
+						<FruitDescription>
+							{selectedFruit.desc}
+						</FruitDescription>
+					</FruitInfoContainer>
+
+					<FruitBackground />
 				</ContentContainer>
 			</AppWrapper>
 		</AppContainer>
