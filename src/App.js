@@ -46,11 +46,11 @@ const fruits = [
 	},
 ];
 
-// const variants = {
-// 	initial: (direction) => ({ x: direction === "right" ? -300 : 300 }),
-// 	animate: { x: 0 },
-// 	exit: (direction) => ({ x: direction === "left" ? -300 : 300 }),
-// };
+const variants = {
+	initial: (direction) => ({ x: direction === "right" ? -300 : 300 }),
+	animate: { x: 0 },
+	exit: (direction) => ({ x: direction === "left" ? -300 : 300 }),
+};
 
 function App() {
 	const [selectedFruit, setSelectedFruit] = useState(fruits[0]);
@@ -73,22 +73,42 @@ function App() {
 					<Tab
 						bg={fruit.color}
 						onClick={() => selectFruit(fruits[index])}
+						layout
 					/>
-					{isSelected && <Underline />}
+					{isSelected && (
+						<Underline
+							layoutId="underline"
+							initial={{ background: prevSelectedFruit.color }}
+							animate={{ background: selectedFruit.color }}
+							transition={{ duration: 0.3 }}
+						/>
+					)}
 				</TabWrapper>
 			);
 		});
 
 	return (
 		<AppContainer>
-			<AppWrapper>
+			<AppWrapper
+				initial={{ borderColor: prevSelectedFruit.color }}
+				animate={{ borderColor: selectedFruit.color }}
+				transition={{ duration: 0.3 }}
+			>
 				<TabsContainer>{renderTabs()}</TabsContainer>
 				<ContentContainer>
-					<Image
-						key={selectedFruit.img}
-						src={selectedFruit.img}
-						alt="Dragon fruit"
-					/>
+					<AnimatePresence custom={direction}>
+						<Image
+							key={selectedFruit.img}
+							src={selectedFruit.img}
+							alt="Dragon fruit"
+							variants={variants}
+							initial="initial"
+							animate="animate"
+							exit="exit"
+							custom={direction}
+							transition={{ duration: 1 }}
+						/>
+					</AnimatePresence>
 
 					<FruitInfoContainer>
 						<FruitName>{selectedFruit.name}</FruitName>
@@ -100,7 +120,11 @@ function App() {
 						</FruitDescription>
 					</FruitInfoContainer>
 
-					<FruitBackground />
+					<FruitBackground
+						initial={{ background: prevSelectedFruit.color }}
+						animate={{ background: selectedFruit.color }}
+						transition={{ duration: 0.3 }}
+					/>
 				</ContentContainer>
 			</AppWrapper>
 		</AppContainer>
